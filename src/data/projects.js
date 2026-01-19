@@ -270,7 +270,7 @@ export const services = [
   }
 ];
 
-// Partner brands
+// Partner brands - Product Certifications
 export const brands = [
   {
     name: 'Sunsynk',
@@ -285,6 +285,18 @@ export const brands = [
     description: 'Advanced solar inverters'
   },
   {
+    name: 'Deye',
+    logo: '/logos/deye.svg',
+    url: 'https://www.deyeinverter.com/',
+    description: 'Hybrid & string inverters'
+  },
+  {
+    name: 'Huawei',
+    logo: '/logos/huawei.svg',
+    url: 'https://solar.huawei.com/',
+    description: 'Smart PV solutions'
+  },
+  {
     name: 'CBI-electric',
     logo: '/logos/cbi.svg',
     url: 'https://cbi-lowvoltage.co.za/',
@@ -292,16 +304,21 @@ export const brands = [
   }
 ];
 
-// Certifications
+// Qualifications & Certifications
 export const certifications = [
+  {
+    name: 'PV Green Card',
+    logo: '/logos/sapvia.svg',
+    description: 'SAPVIA certified solar PV installer'
+  },
   {
     name: 'Red Seal Certified',
     logo: '/logos/red-seal.svg',
-    description: 'Nationally recognized trade qualification'
+    description: 'Nationally recognized trade qualification (QCTO)'
   },
   {
-    name: 'SAPVIA Member',
-    logo: '/logos/sapvia.svg',
-    description: 'South African Photovoltaic Industry Association'
+    name: "Wireman's Licence",
+    logo: '/logos/wireman.svg',
+    description: 'Licensed to issue Certificates of Compliance (CoC)'
   }
 ];

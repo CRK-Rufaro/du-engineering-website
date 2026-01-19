@@ -48,6 +48,20 @@ function Home() {
             <div className="certification-card">
               <div className="cert-image-wrapper">
                 <img
+                  src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop"
+                  alt="PV Green Card - SAPVIA Certified Solar Installer"
+                  className="cert-image"
+                />
+              </div>
+              <div className="cert-content">
+                <h3>PV Green Card</h3>
+                <p>SAPVIA (South African Photovoltaic Industry Association) certified solar PV installer. The PV GreenCard programme ensures our installers meet the highest industry standards for solar installations.</p>
+              </div>
+            </div>
+
+            <div className="certification-card">
+              <div className="cert-image-wrapper">
+                <img
                   src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=300&fit=crop"
                   alt="Red Seal Certified Electrician"
                   className="cert-image"
@@ -62,14 +76,14 @@ function Home() {
             <div className="certification-card">
               <div className="cert-image-wrapper">
                 <img
-                  src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop"
-                  alt="SAPVIA Member - Solar PV Certified"
+                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop"
+                  alt="Wireman's Licence - Certificate of Compliance"
                   className="cert-image"
                 />
               </div>
               <div className="cert-content">
-                <h3>SAPVIA Member</h3>
-                <p>Proud member of the South African Photovoltaic Industry Association. Our solar installers are trained to the highest industry standards through the PV GreenCard programme.</p>
+                <h3>Wireman's Licence</h3>
+                <p>Licensed to issue Certificates of Compliance (CoC) for electrical installations. Required for property sales, insurance, and ensuring your electrical system meets SANS 10142 safety standards.</p>
               </div>
             </div>
           </div>
@@ -142,11 +156,18 @@ function Home() {
               <p>Advanced Solar Inverters</p>
             </a>
 
-            <a href="https://cbi-lowvoltage.co.za/" target="_blank" rel="noopener noreferrer" className="brand-card">
+            <a href="https://www.deyeinverter.com/" target="_blank" rel="noopener noreferrer" className="brand-card">
               <div className="brand-logo-placeholder">
-                <span className="brand-name">CBI-electric</span>
+                <span className="brand-name">Deye</span>
               </div>
-              <p>Quality Circuit Breakers</p>
+              <p>Hybrid & String Inverters</p>
+            </a>
+
+            <a href="https://solar.huawei.com/" target="_blank" rel="noopener noreferrer" className="brand-card">
+              <div className="brand-logo-placeholder">
+                <span className="brand-name">Huawei</span>
+              </div>
+              <p>Smart PV Solutions</p>
             </a>
           </div>
         </div>

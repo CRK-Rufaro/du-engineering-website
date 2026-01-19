@@ -548,6 +548,12 @@ p {
   }
 }
 
+@media (min-width: 1200px) {
+  .certifications-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .certification-card {
   background: white;
   border-radius: var(--radius-xl);
@@ -678,10 +684,16 @@ p {
 
 .brands-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-4);
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .brands-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .brand-card {
@@ -724,11 +736,6 @@ p {
   margin-bottom: 0;
 }
 
-@media (max-width: 639px) {
-  .brands-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* ============================================
    SERVICES SECTION
