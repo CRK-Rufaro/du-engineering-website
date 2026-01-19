@@ -270,37 +270,110 @@ export const services = [
   }
 ];
 
-// Partner brands - Product Certifications
+// Partner brands - Product Certifications (Inverters)
 export const brands = [
   {
     name: 'Sunsynk',
-    logo: '/logos/sunsynk.svg',
+    logo: '/logos/inverters/sunsynk.png',
     url: 'https://www.sunsynk.org/',
     description: 'Premium hybrid inverters'
   },
   {
     name: 'Luxpower',
-    logo: '/logos/luxpower.svg',
+    logo: '/logos/inverters/luxpower.png',
     url: 'https://luxpowertek.co.za/',
     description: 'Advanced solar inverters'
   },
   {
     name: 'Deye',
-    logo: '/logos/deye.svg',
+    logo: '/logos/inverters/deye.png',
     url: 'https://www.deyeinverter.com/',
     description: 'Hybrid & string inverters'
   },
   {
     name: 'Huawei',
-    logo: '/logos/huawei.svg',
+    logo: '/logos/inverters/huawei.png',
     url: 'https://solar.huawei.com/',
     description: 'Smart PV solutions'
+  }
+];
+
+// Additional partner brands by category
+export const batteryBrands = [
+  {
+    name: 'Pylontech',
+    logo: '/logos/batteries/pylontech.svg',
+    url: 'https://www.pylontech.com.cn/',
+    description: 'Lithium battery storage'
   },
   {
+    name: 'Freedom Won',
+    logo: '/logos/batteries/freedom-won.png',
+    url: 'https://www.freedomwon.co.za/',
+    description: 'SA lithium batteries'
+  },
+  {
+    name: 'Hubble',
+    logo: '/logos/batteries/hubble.avif',
+    url: 'https://www.hubblelithium.co.za/',
+    description: 'Lithium energy storage'
+  },
+  {
+    name: 'Alpha ESS',
+    logo: '/logos/batteries/alpha-ess.svg',
+    url: 'https://www.alpha-ess.com/',
+    description: 'Energy storage systems'
+  },
+  {
+    name: 'Volta',
+    logo: '/logos/batteries/volta.png',
+    url: 'https://voltapower.co.za/',
+    description: 'Battery solutions'
+  }
+];
+
+export const panelBrands = [
+  {
+    name: 'Canadian Solar',
+    logo: '/logos/panels/canadian-solar.png',
+    url: 'https://www.canadiansolar.com/',
+    description: 'Tier-1 solar panels'
+  },
+  {
+    name: 'JA Solar',
+    logo: '/logos/panels/ja-solar.png',
+    url: 'https://www.jasolar.com/',
+    description: 'High-efficiency panels'
+  }
+];
+
+export const electricalBrands = [
+  {
     name: 'CBI-electric',
-    logo: '/logos/cbi.svg',
+    logo: '/logos/electrical/cbi-electric.png',
     url: 'https://cbi-lowvoltage.co.za/',
     description: 'Quality circuit breakers'
+  },
+  {
+    name: 'DEHN',
+    logo: '/logos/electrical/dehn.svg',
+    url: 'https://www.dehn.co.za/',
+    description: 'Surge protection'
+  }
+];
+
+export const mountingBrands = [
+  {
+    name: 'Schletter',
+    logo: '/logos/mounting/schletter.svg',
+    url: 'https://www.schletter-group.com/',
+    description: 'Solar mounting systems'
+  },
+  {
+    name: 'Renusol',
+    logo: '/logos/mounting/renusol.svg',
+    url: 'https://www.renusol.com/',
+    description: 'Mounting solutions'
   }
 ];
 
@@ -308,17 +381,17 @@ export const brands = [
 export const certifications = [
   {
     name: 'PV Green Card',
-    logo: '/logos/sapvia.svg',
+    logo: '/logos/certifications/pv-greencard.png',
     description: 'SAPVIA certified solar PV installer'
   },
   {
-    name: 'Red Seal Certified',
-    logo: '/logos/red-seal.svg',
-    description: 'Nationally recognized trade qualification (QCTO)'
+    name: 'SAPVIA Member',
+    logo: '/logos/certifications/sapvia.png',
+    description: 'SA Photovoltaic Industry Association'
   },
   {
-    name: "Wireman's Licence",
-    logo: '/logos/wireman.svg',
-    description: 'Licensed to issue Certificates of Compliance (CoC)'
+    name: 'Red Seal Certified',
+    logo: '/logos/certifications/qcto.svg',
+    description: 'Nationally recognized trade qualification (QCTO)'
   }
 ];

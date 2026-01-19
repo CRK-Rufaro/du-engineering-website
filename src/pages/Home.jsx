@@ -143,29 +143,29 @@ function Home() {
 
           <div className="brands-grid">
             <a href="https://www.sunsynk.org/" target="_blank" rel="noopener noreferrer" className="brand-card">
-              <div className="brand-logo-placeholder">
-                <span className="brand-name">Sunsynk</span>
+              <div className="brand-logo-wrapper">
+                <img src="/logos/inverters/sunsynk.png" alt="Sunsynk" className="brand-logo" />
               </div>
               <p>Premium Hybrid Inverters</p>
             </a>
 
             <a href="https://luxpowertek.co.za/" target="_blank" rel="noopener noreferrer" className="brand-card">
-              <div className="brand-logo-placeholder">
-                <span className="brand-name">Luxpower</span>
+              <div className="brand-logo-wrapper">
+                <img src="/logos/inverters/luxpower.png" alt="Luxpower" className="brand-logo" />
               </div>
               <p>Advanced Solar Inverters</p>
             </a>
 
             <a href="https://www.deyeinverter.com/" target="_blank" rel="noopener noreferrer" className="brand-card">
-              <div className="brand-logo-placeholder">
-                <span className="brand-name">Deye</span>
+              <div className="brand-logo-wrapper">
+                <img src="/logos/inverters/deye.png" alt="Deye" className="brand-logo" />
               </div>
               <p>Hybrid & String Inverters</p>
             </a>
 
             <a href="https://solar.huawei.com/" target="_blank" rel="noopener noreferrer" className="brand-card">
-              <div className="brand-logo-placeholder">
-                <span className="brand-name">Huawei</span>
+              <div className="brand-logo-wrapper">
+                <img src="/logos/inverters/huawei.png" alt="Huawei" className="brand-logo" />
               </div>
               <p>Smart PV Solutions</p>
             </a>
