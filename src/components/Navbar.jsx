@@ -8,7 +8,8 @@ function Navbar() {
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/projects', label: 'Projects' },
-    { to: '/#services', label: 'Services' },
+    { to: '/brands', label: 'Brands' },
+    { to: '/about', label: 'About' },
     { to: '/#contact', label: 'Contact' }
   ];
 
@@ -27,8 +28,11 @@ function Navbar() {
     <nav className="navbar">
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
-          <span className="logo-text">DU Engineering</span>
-          <span className="logo-tagline">Perfection is possible</span>
+          <img src="/logos/du-engineering-logo.svg" alt="DUE Engineering" className="logo-icon" />
+          <div className="logo-text-wrapper">
+            <span className="logo-text">DUE Engineering</span>
+            <span className="logo-tagline">Perfection is possible</span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}

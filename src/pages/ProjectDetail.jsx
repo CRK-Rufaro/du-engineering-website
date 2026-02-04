@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { projects } from '../data/projects';
+import SEO from '../components/SEO';
 
 function ProjectDetail() {
   const { projectId } = useParams();
@@ -9,13 +10,20 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <section className="not-found-section">
-        <div className="container">
-          <h1>Project Not Found</h1>
-          <p>The project you're looking for doesn't exist.</p>
-          <Link to="/projects" className="btn btn-primary">View All Projects</Link>
-        </div>
-      </section>
+      <>
+        <SEO
+          title="Project Not Found"
+          description="The project you're looking for doesn't exist."
+          path={`/projects/${projectId}`}
+        />
+        <section className="not-found-section">
+          <div className="container">
+            <h1>Project Not Found</h1>
+            <p>The project you're looking for doesn't exist.</p>
+            <Link to="/projects" className="btn btn-primary">View All Projects</Link>
+          </div>
+        </section>
+      </>
     );
   }
 
@@ -26,6 +34,12 @@ function ProjectDetail() {
 
   return (
     <>
+      <SEO
+        title={`${project.title} - ${project.systemSize} Solar Case Study`}
+        description={`${project.description.substring(0, 155)}...`}
+        path={`/projects/${project.id}`}
+        image={project.heroImage}
+      />
       {/* Hero Section */}
       <section className="project-hero" style={{ backgroundImage: `url(${project.heroImage})` }}>
         <div className="project-hero-overlay"></div>

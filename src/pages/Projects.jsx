@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
+import SEO from '../components/SEO';
 
 function Projects() {
   const [filter, setFilter] = useState('all');
@@ -13,11 +14,16 @@ function Projects() {
 
   return (
     <>
+      <SEO
+        title="Solar Installation Projects Portfolio"
+        description="Explore DUE Engineering's portfolio of 500+ successful solar and electrical installations across Klerksdorp, Johannesburg, Pretoria, and North West Province. See real results and client savings."
+        path="/projects"
+      />
       {/* Hero Section */}
       <section className="page-hero">
         <div className="container">
           <h1>Our Projects</h1>
-          <p>Explore our portfolio of successful solar and electrical installations across Gauteng</p>
+          <p>Explore our portfolio of successful solar and electrical installations across North West and Gauteng</p>
         </div>
       </section>
 

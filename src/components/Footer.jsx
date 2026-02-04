@@ -9,10 +9,10 @@ function Footer() {
         <div className="footer-grid">
           {/* Company Info */}
           <div className="footer-section">
-            <h4 className="footer-title">DU Engineering</h4>
+            <h4 className="footer-title">DUE Engineering</h4>
             <p className="footer-tagline">Perfection is possible</p>
             <p className="footer-description">
-              Professional solar and electrical installations across Gauteng.
+              Professional solar and electrical installations across Klerksdorp and North West.
               Red Seal certified electricians and SAPVIA member.
             </p>
           </div>
@@ -23,7 +23,8 @@ function Footer() {
             <ul className="footer-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/projects">Projects</Link></li>
-              <li><Link to="/#services">Services</Link></li>
+              <li><Link to="/brands">Brands</Link></li>
+              <li><Link to="/about">About</Link></li>
               <li><Link to="/#contact">Contact</Link></li>
             </ul>
           </div>
@@ -67,7 +68,7 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="footer-bottom">
-          <p>&copy; {currentYear} DU Engineering. All rights reserved.</p>
+          <p>&copy; {currentYear} DUE Engineering. All rights reserved.</p>
           <p className="footer-credit">
             Website by <a href="https://sparkstudios.co.za" target="_blank" rel="noopener noreferrer">Spark Studios</a>
           </p>

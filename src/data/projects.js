@@ -1,4 +1,4 @@
-// Project data for DU Engineering portfolio
+// Project data for DUE Engineering portfolio
 export const projects = [
   {
     id: 'klerksdorp-residence-8kw',
@@ -24,7 +24,7 @@ export const projects = [
       'ROI expected within 4 years'
     ],
     testimonial: {
-      quote: 'DU Engineering transformed our home. We barely notice load shedding anymore, and our electricity bills have dropped dramatically.',
+      quote: 'DUE Engineering transformed our home. We barely notice load shedding anymore, and our electricity bills have dropped dramatically.',
       author: 'The Mokoena Family',
       location: 'Sandton'
     }
@@ -169,7 +169,7 @@ export const projects = [
       'Attracted new eco-conscious tenants'
     ],
     testimonial: {
-      quote: 'DU Engineering handled this massive project with incredible professionalism. The ROI speaks for itself.',
+      quote: 'DUE Engineering handled this massive project with incredible professionalism. The ROI speaks for itself.',
       author: 'Centurion Business Park Owners',
       location: 'Centurion'
     }

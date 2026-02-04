@@ -1,16 +1,75 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects, services, brands, certifications } from '../data/projects';
+import SEO from '../components/SEO';
+
+// Google Apps Script Web App URL - UPDATE THIS AFTER SETUP
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 
 function Home() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
-  const [formStatus, setFormStatus] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    service: '',
+    message: '',
+    honeypot: '' // Spam protection - hidden field
+  });
+  const [formStatus, setFormStatus] = useState({ type: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormStatus('Thank you! We will contact you within 24 hours.');
-    setTimeout(() => setFormStatus(''), 5000);
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' });
+
+    // Spam check - if honeypot is filled, silently reject
+    if (formData.honeypot) {
+      setFormStatus({ type: 'success', message: 'Thank you! We will contact you within 24 hours.' });
+      return;
+    }
+
+    // Check if Google Script URL is configured
+    if (!GOOGLE_SCRIPT_URL) {
+      // Fallback for development/testing
+      console.log('Form submission (Google Sheets not configured):', formData);
+      setFormStatus({ type: 'success', message: 'Thank you! We will contact you within 24 hours.' });
+      setFormData({ name: '', email: '', phone: '', service: '', message: '', honeypot: '' });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setFormStatus({ type: '', message: '' });
+
+    // Prepare form data for Google Apps Script
+    const submitData = new FormData();
+    submitData.append('name', formData.name);
+    submitData.append('email', formData.email);
+    submitData.append('phone', formData.phone);
+    submitData.append('service', formData.service);
+    submitData.append('message', formData.message);
+
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: submitData,
+        mode: 'no-cors' // Required for Google Apps Script
+      });
+
+      // Success (no-cors means we assume success if no error thrown)
+      setFormStatus({
+        type: 'success',
+        message: 'Thank you! We will contact you within 24 hours.'
+      });
+      setFormData({ name: '', email: '', phone: '', service: '', message: '', honeypot: '' });
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setFormStatus({
+        type: 'error',
+        message: 'Something went wrong. Please try again or email us directly at info@duengineering.co.za'
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -22,13 +81,18 @@ function Home() {
 
   return (
     <>
+      <SEO
+        title="Professional Solar & Electrical Solutions in Klerksdorp"
+        description="DUE Engineering provides professional solar installations, battery backup systems, and electrical services in Klerksdorp, North West & Gauteng. Red Seal certified, SAPVIA accredited. 500+ installations. Get a free quote today."
+        path="/"
+      />
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background"></div>
         <div className="container hero-content">
           <h1 className="hero-title">Professional Solar & Electrical Solutions</h1>
           <p className="hero-subtitle">
-            Save up to 70% on electricity with premium solar installations from Gauteng's trusted experts
+            Save up to 70% on electricity with premium solar installations from Klerksdorp's trusted installers
           </p>
           <p className="hero-tagline">Perfection is possible</p>
           <div className="hero-cta">
@@ -41,95 +105,74 @@ function Home() {
       {/* Why Choose Us Section */}
       <section className="why-choose-section">
         <div className="container">
-          <h2 className="section-title">Why Choose DU Engineering?</h2>
+          <h2 className="section-title">Why Choose DUE Engineering?</h2>
 
-          {/* Certifications Row */}
-          <div className="certifications-row">
-            <div className="certification-card">
-              <div className="cert-image-wrapper">
+          {/* Certifications Row - Logo-based design */}
+          <div className="certifications-grid">
+            <div className="certification-card-v2">
+              <div className="cert-logo-wrapper">
                 <img
-                  src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=300&fit=crop"
-                  alt="PV Green Card - SAPVIA Certified Solar Installer"
-                  className="cert-image"
+                  src="/logos/certifications/pv-greencard.png"
+                  alt="PV Green Card"
+                  className="cert-logo"
                 />
               </div>
-              <div className="cert-content">
-                <h3>PV Green Card</h3>
-                <p>SAPVIA (South African Photovoltaic Industry Association) certified solar PV installer. The PV GreenCard programme ensures our installers meet the highest industry standards for solar installations.</p>
-              </div>
+              <h3>PV Green Card</h3>
+              <p>SAPVIA certified solar PV installer meeting the highest industry standards for solar installations.</p>
             </div>
 
-            <div className="certification-card">
-              <div className="cert-image-wrapper">
+            <div className="certification-card-v2">
+              <div className="cert-logo-wrapper">
                 <img
-                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=400&h=300&fit=crop"
-                  alt="Red Seal Certified Electrician"
-                  className="cert-image"
+                  src="/logos/certifications/qcto.svg"
+                  alt="QCTO Red Seal"
+                  className="cert-logo"
                 />
               </div>
-              <div className="cert-content">
-                <h3>Red Seal Certified</h3>
-                <p>Our electricians hold the nationally recognized Red Seal trade qualification - the highest standard of electrical trade certification in South Africa, approved by QCTO (Quality Council for Trades and Occupations).</p>
-              </div>
+              <h3>Red Seal Certified</h3>
+              <p>Nationally recognized Red Seal trade qualification - the highest standard of electrical certification in South Africa.</p>
             </div>
 
-            <div className="certification-card">
-              <div className="cert-image-wrapper">
+            <div className="certification-card-v2">
+              <div className="cert-logo-wrapper">
                 <img
-                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop"
-                  alt="Wireman's Licence - Certificate of Compliance"
-                  className="cert-image"
+                  src="/logos/certifications/sapvia.png"
+                  alt="SAPVIA Member"
+                  className="cert-logo"
                 />
               </div>
-              <div className="cert-content">
-                <h3>Wireman's Licence</h3>
-                <p>Licensed to issue Certificates of Compliance (CoC) for electrical installations. Required for property sales, insurance, and ensuring your electrical system meets SANS 10142 safety standards.</p>
+              <h3>SAPVIA Member</h3>
+              <p>South African Photovoltaic Industry Association member committed to industry excellence.</p>
+            </div>
+
+            <div className="certification-card-v2">
+              <div className="cert-logo-wrapper coc-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
+              <h3>Wireman's Licence</h3>
+              <p>Licensed to issue Certificates of Compliance (CoC) for electrical installations per SANS 10142.</p>
             </div>
           </div>
 
-          {/* Feature Cards */}
-          <div className="features-grid">
-            <div className="feature-card">
-              <div className="feature-image-wrapper">
-                <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop"
-                  alt="Solar panel installation"
-                  className="feature-image"
-                />
-              </div>
-              <h4>500+ Installations</h4>
-              <p>Trusted by homeowners and businesses across Gauteng for quality workmanship</p>
+          {/* Stats Row */}
+          <div className="stats-row">
+            <div className="stat-item">
+              <span className="stat-number">500+</span>
+              <span className="stat-label">Installations</span>
             </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h4>5-Year Warranty</h4>
-              <p>Industry-leading workmanship guarantee on all installations</p>
+            <div className="stat-item">
+              <span className="stat-number">5</span>
+              <span className="stat-label">Year Warranty</span>
             </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h4>Same-Day Quotes</h4>
-              <p>Free consultations and quotes within 24 hours</p>
+            <div className="stat-item">
+              <span className="stat-number">24hr</span>
+              <span className="stat-label">Quote Response</span>
             </div>
-
-            <div className="feature-card">
-              <div className="feature-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              </div>
-              <h4>Full Support</h4>
-              <p>Ongoing maintenance and monitoring for peace of mind</p>
+            <div className="stat-item">
+              <span className="stat-number">100%</span>
+              <span className="stat-label">Satisfaction</span>
             </div>
           </div>
         </div>
@@ -149,9 +192,9 @@ function Home() {
               <p>Premium Hybrid Inverters</p>
             </a>
 
-            <a href="https://luxpowertek.co.za/" target="_blank" rel="noopener noreferrer" className="brand-card">
+            <a href="https://luxpowertek.com/" target="_blank" rel="noopener noreferrer" className="brand-card">
               <div className="brand-logo-wrapper">
-                <img src="/logos/inverters/luxpower.png" alt="Luxpower" className="brand-logo" />
+                <img src="/logos/inverters/luxpower-full.png" alt="Luxpower" className="brand-logo" />
               </div>
               <p>Advanced Solar Inverters</p>
             </a>
@@ -302,16 +345,32 @@ function Home() {
             </div>
 
             <div className="contact-form-wrapper">
-              {formStatus && (
-                <div className="form-success">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 13l4 4L19 7" />
-                  </svg>
-                  {formStatus}
+              {formStatus.message && (
+                <div className={`form-status-message ${formStatus.type}`}>
+                  {formStatus.type === 'success' ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                  )}
+                  {formStatus.message}
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="contact-form">
+                {/* Honeypot field - hidden from users, catches bots */}
+                <input
+                  type="text"
+                  name="honeypot"
+                  value={formData.honeypot}
+                  onChange={handleChange}
+                  style={{ display: 'none' }}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
                 <div className="form-group">
                   <label htmlFor="name" className="form-label">Full Name *</label>
                   <input
@@ -390,8 +449,12 @@ function Home() {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-large submit-btn">
-                  Request Free Quote
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-large submit-btn"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Request Free Quote'}
                 </button>
               </form>
             </div>
