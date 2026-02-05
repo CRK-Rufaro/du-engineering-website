@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects, services, brands, certifications } from '../data/projects';
 import SEO from '../components/SEO';
+import { trackFormSubmission, trackPhoneClick, trackEmailClick } from '../utils/analytics';
 
 // Google Apps Script Web App URL - UPDATE THIS AFTER SETUP
 const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
@@ -31,6 +32,7 @@ function Home() {
     if (!GOOGLE_SCRIPT_URL) {
       // Fallback for development/testing
       console.log('Form submission (Google Sheets not configured):', formData);
+      trackFormSubmission(formData.service); // Track conversion even in dev
       setFormStatus({ type: 'success', message: 'Thank you! We will contact you within 24 hours.' });
       setFormData({ name: '', email: '', phone: '', service: '', message: '', honeypot: '' });
       return;
@@ -55,6 +57,7 @@ function Home() {
       });
 
       // Success (no-cors means we assume success if no error thrown)
+      trackFormSubmission(formData.service); // Track conversion
       setFormStatus({
         type: 'success',
         message: 'Thank you! We will contact you within 24 hours.'
@@ -317,7 +320,7 @@ function Home() {
                   </svg>
                   <div>
                     <strong>Email</strong>
-                    <p>info@duengineering.co.za</p>
+                    <p><a href="mailto:info@duengineering.co.za" onClick={trackEmailClick}>info@duengineering.co.za</a></p>
                   </div>
                 </div>
 

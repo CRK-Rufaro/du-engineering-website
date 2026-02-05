@@ -1,12 +1,21 @@
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { projects } from '../data/projects';
 import SEO from '../components/SEO';
+import { trackProjectView } from '../utils/analytics';
 
 function ProjectDetail() {
   const { projectId } = useParams();
   const navigate = useNavigate();
 
   const project = projects.find(p => p.id === projectId);
+
+  // Track project view when page loads
+  useEffect(() => {
+    if (project) {
+      trackProjectView(project.id, project.title, project.category);
+    }
+  }, [project]);
 
   if (!project) {
     return (
