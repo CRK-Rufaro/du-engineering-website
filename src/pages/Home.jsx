@@ -4,6 +4,9 @@ import { projects, services, brands, certifications } from '../data/projects';
 import SEO from '../components/SEO';
 import { trackFormSubmission, trackPhoneClick, trackEmailClick } from '../utils/analytics';
 
+const PHONE_NUMBER = '+27 78 683 5210';
+const PHONE_LINK = 'tel:+27786835210';
+
 // Google Apps Script Web App URL - UPDATE THIS AFTER SETUP
 const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 
@@ -314,6 +317,16 @@ function Home() {
               <p>Ready to start saving on electricity? Fill out the form and we'll contact you within 24 hours with a custom quote.</p>
 
               <div className="contact-details">
+                <div className="contact-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div>
+                    <strong>Phone</strong>
+                    <p><a href={PHONE_LINK} onClick={trackPhoneClick}>{PHONE_NUMBER}</a></p>
+                  </div>
+                </div>
+
                 <div className="contact-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
