@@ -7,6 +7,8 @@ import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 import Brands from './pages/Brands';
 import About from './pages/About';
+import Quote from './pages/Quote';
+
 
 // Scroll to top on route change + GA4 pageview tracking
 function ScrollToTop() {
@@ -51,6 +53,11 @@ function App() {
             <Route path="/projects/:projectId" element={<ProjectDetail />} />
             <Route path="/brands" element={<Brands />} />
             <Route path="/about" element={<About />} />
+            {/* Quote page - same as home but with quote-specific SEO, scrolls to contact */}
+            <Route path="/quote" element={<Quote />} />
+            <Route path="/quote.html" element={<Quote />} />
+            {/* Catch-all: render home for unknown pages */}
+            <Route path="*" element={<Home />} />
           </Routes>
         </main>
         <Footer />

@@ -10,7 +10,7 @@ const PHONE_LINK = 'tel:+27786835210';
 // Google Apps Script Web App URL - UPDATE THIS AFTER SETUP
 const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || '';
 
-function Home() {
+function Home({ skipSEO = false }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -87,11 +87,13 @@ function Home() {
 
   return (
     <>
-      <SEO
-        title="Professional Solar & Electrical Solutions in Klerksdorp"
-        description="DUE Engineering provides professional solar installations, battery backup systems, and electrical services in Klerksdorp, North West & Gauteng. Red Seal certified, SAPVIA accredited. 500+ installations. Get a free quote today."
-        path="/"
-      />
+      {!skipSEO && (
+        <SEO
+          title="Professional Solar & Electrical Solutions in Klerksdorp"
+          description="DUE Engineering provides professional solar installations, battery backup systems, and electrical services in Klerksdorp, North West & Gauteng. Red Seal certified, SAPVIA accredited. 500+ installations. Get a free quote today."
+          path="/"
+        />
+      )}
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background"></div>
