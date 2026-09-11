@@ -286,7 +286,7 @@ function sendEmailNotification(data, timestamp) {
     emailOptions.cc = CONFIG.ccEmails;
   }
 
-  MailApp.sendEmail(emailOptions);
+  deliver(emailOptions);
 }
 
 // ============================================
@@ -392,7 +392,7 @@ CONFIG.websiteUrl;
 '</body>' +
 '</html>';
 
-  MailApp.sendEmail({
+  deliver({
     to: data.email,
     subject: subject,
     body: plainBody,
@@ -400,6 +400,53 @@ CONFIG.websiteUrl;
     replyTo: CONFIG.businessEmail,
     name: CONFIG.businessName
   });
+}
+
+
+// ============================================
+// DELIVERY — GmailApp, not MailApp
+// ============================================
+
+/**
+ * Send one message, and say which path actually sent it.
+ *
+ * Measured on the CK General Practice tenant, 2026-08-05:
+ * MailApp.sendEmail() to an address OUTSIDE the sending domain returned
+ * successfully AND consumed quota (100 -> 98), and the message was never
+ * delivered. No exception, no bounce, nothing in All Mail. Internal sends
+ * arrived normally, so every internal test passed while real customers got
+ * nothing. This script had the same bug: the customer confirmation goes to an
+ * outside address every single time.
+ *
+ * MailApp and GmailApp are not two names for the same thing. MailApp is the
+ * lightweight send-only service; GmailApp sends through the account's real
+ * Gmail, the same path as composing by hand — which does arrive. Google applies
+ * tighter reputation controls to programmatic MailApp mail from a domain that
+ * has only recently started sending.
+ *
+ * MailApp stays as the fallback, because an undelivered confirmation still
+ * beats a thrown request. The return value records which path ran, so
+ * "accepted" and "delivered" stop being the same word in the logs.
+ *
+ * Canon SB46.
+ */
+function deliver(payload) {
+  const options = {
+    htmlBody: payload.htmlBody,
+    replyTo: payload.replyTo,
+    name: payload.name
+  };
+  if (payload.cc) options.cc = payload.cc;
+
+  try {
+    GmailApp.sendEmail(payload.to, payload.subject, payload.body, options);
+    Logger.log('Sent via GmailApp to ' + payload.to);
+    return 'Sent';
+  } catch (gmailErr) {
+    Logger.log('GmailApp failed, falling back to MailApp: ' + gmailErr);
+    MailApp.sendEmail(payload);
+    return 'Sent (MailApp fallback)';
+  }
 }
 
 // ============================================
