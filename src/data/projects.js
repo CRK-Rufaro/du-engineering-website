@@ -26,7 +26,7 @@ export const projects = [
     testimonial: {
       quote: 'DUE Engineering transformed our home. We barely notice load shedding anymore, and our electricity bills have dropped dramatically.',
       author: 'The Mokoena Family',
-      location: 'Sandton'
+      location: 'Klerksdorp'
     }
   },
   {

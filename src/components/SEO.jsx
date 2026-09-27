@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 const SITE_URL = 'https://duengineering.co.za';
-const DEFAULT_IMAGE = `${SITE_URL}/due_engineering_logo.svg`;
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 function SEO({ title, description, path = '/', image, jsonLd }) {
   const canonical = `${SITE_URL}${path}`;
